@@ -1,0 +1,106 @@
+
+19.
+Create Database DYPIT using MongoDB
+Create following Collections
+Teachers(Tname,dno,dname,experience,salary,date_of_joining )
+Students(Sname,roll_no,class)
+
+
+use DYPIT;
+
+db.createCollection('teachers');
+
+db.createCollection('students');
+
+db.teachers.insert({ 'tname': 'sarvesh', 'dno': 12, 'dname': 'kadlag', 'experience': 5, 'salary':76000, 'date_of_joining': ISODate("2017-11-10T06:31:15.000Z") });
+
+
+ db.teachers.insertMany([{
+...     'tname': 'Ahindra',
+...     'dno': 10 ,
+...     'dname': 'jadhav' ,
+...     'experience' : 10,
+...     'salary' : 30000,
+...     'date_of_joining' : ISODate("2011-01-15T06:31:15.000Z")
+...  },
+... {
+... 'tname': 'chetan',
+...     'dno': 1 ,
+...     'dname': 'patil' ,
+...     'experience' : 6,
+...     'salary' : 20000,
+...     'date_of_joining' : ISODate("2015-10-16T06:31:15.000Z")
+... },
+... {
+... 'tname': 'Mahesh',
+...     'dno': 8 ,
+...     'dname': 'thakre' ,
+...     'experience' : 2,
+...     'salary' : 56000,
+...     'date_of_joining' : ISODate("2021-05-10T06:31:15.000Z")
+... 
+... }
+... ]);
+
+
+
+db.teachers.find().pretty();
+
+
+db.students.insertMany([{
+...     'sname': 'krishna',
+...     'roll_no': 71 ,
+...     'class': 'TCOD' ,
+... 
+...  },
+... {
+...     'sname': 'jayesh',
+...     'roll_no': 77 ,
+...     'class': 'TCOD' 
+... },
+... {
+...     'sname': 'rupesh',
+...     'roll_no': 32 ,
+...     'class': 'TCOD' 
+... 
+... },
+... {
+...     'sname': 'akash',
+...     'roll_no': 73 ,
+...     'class': 'TCOD' 
+... },
+... {
+...     'sname': 'dinesh',
+...     'roll_no': 79 ,
+...     'class': 'TCOC' 
+... }
+... ]);
+
+
+db.teachers.find({dname : 'COMP'}).pretty();
+
+
+db.teachers.find({dname : 'COMP'}, {dname : 'ENTC'}, {dname :'IT' }).pretty();
+
+
+db.teachers.find({salary :{$gt : 10000} }).pretty();
+
+
+db.students.find({roll_no : 71}).pretty();
+
+
+db.teachers.insertOne( { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 5, 'salary': 9200, 'date_of_joining': ISODate("2012-10-11T06:31:15.000Z") } );
+
+db.teachers.updateOne({tname : 'praveen'}, { $set : {experience: 10} });
+
+
+db.teachers.updateMany({dname : 'IT'}, { $set : {dname: 'COMP'} });
+
+db.teachers.deleteMany({dname : 'IT'});
+
+db.teachers.find().sort({dno : 1}).limit(3).pretty();
+
+
+
+
+

@@ -1,0 +1,140 @@
+
+DBMS PR 20
+
+
+1.Create Database DYPIT
+use DYPIT;
+
+
+2. Create following Collections
+Teachers(Tname,dno,dname,experience,salary,date_of_joining )
+Students(Sname,roll_no,class)
+
+db.createCollection('teachers');
+
+db.createCollection('students');
+
+db.teachers.insertOne({ 'tname': 'Rahul', 
+'dno': 12, 'dname': '', 
+'experience': 5, 'salary':76000,
+'date_of_joining': ISODate("2017-11-10T06:31:15.000Z") });
+
+db.teachers.insertMany([
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 5, 'salary': 23000, 'date_of_joining': ISODate("2017-10-12T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 4, 'salary': 92000, 'date_of_joining': ISODate("2018-11-21T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 2, 'salary': 42000, 'date_of_joining': ISODate("2020-10-02T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 6, 'salary': 25000, 'date_of_joining': ISODate("2016-12-22T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 2, 'salary': 54000, 'date_of_joining': ISODate("2020-09-17T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 1, 'salary': 56000, 'date_of_joining': ISODate("2021-06-13T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 9, 'salary': 30000, 'date_of_joining': ISODate("2013-03-23T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 7, 'salary': 60000, 'date_of_joining': ISODate("2015-03-14T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 3, 'salary': 30000, 'date_of_joining': ISODate("2019-11-10T06:31:15.000Z") }
+] );
+
+
+
+db.teachers.find().pretty();
+
+
+db.students.insertMany([{
+   'sname': 'krishna',
+    'roll_no': 71 ,
+   'class': 'TCOD' ,
+
+ },
+{
+     'sname': 'jayesh',
+     'roll_no': 77 ,
+     'class': 'TCOD' 
+ },
+ {
+     'sname': 'rupesh',
+     'roll_no': 32 ,
+     'class': 'TCOD' 
+ 
+ },
+ {
+     'sname': 'akash',
+     'roll_no': 73 ,
+     'class': 'TCOD' 
+},
+ {
+    'sname': 'dinesh',
+    'roll_no': 79 ,
+     'class': 'TCOC' 
+ }
+]);
+
+
+
+3. Find the information about two teachers
+
+db.teachers.find().limit(2).pretty();
+
+
+4. Find the information about all teachers of computer department
+
+db.teachers.find({dname : 'COMP'}).pretty();
+
+
+5. Find the information about all teachers of computer,IT,and e&TC department
+
+db.teachers.find( { dname: { $in: [ 'COMP','IT','ENTC'] } } );
+
+
+6. Find the information about all teachers of computer,IT,and E&TC department having salary
+greate than or equl to 25000/-
+
+db.teachers.find( { salary : {$gte : 2500} , dname : {$in :['IT','COMP', 'ENTC']}});
+
+
+7. Find the student information having roll_no = 25 or Sname=xyz
+
+db.students.find( { roll_no : 71 } ).pretty();
+
+
+8. Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry.
+
+db.teachers.updateMany( {tname : 'praveen'}, {$set : { experience : 10}});
+
+
+9. Update the deparment of all the teachers working in IT deprtment to COMP
+
+db.teachers.updateMany (
+{dname : 'IT'}, {$set : {dname : 'COMP'}} 
+);
+
+
+10. find the teachers name and their experience from teachers collection
+
+db.teachers.find( {}, {tname :1, experience : 1});
+
+
+11. Using Save() method insert one entry in department collection
+
+//this is the syntax of the save method but this method is deprecated
+db.teachers.save( { tname : "krishna", dno : 4 } )
+
+
+13. Delete all the doccuments from teachers collection having IT dept.
+
+db.teachers.deleteMany({dname : 'IT'});
+
+
+14. display with pretty() method, the first 5 documents in teachers collection in ascending order
+
+db.teachers.find().sort({dno : 1}).limit(5).pretty();
+
+
+
+
+
+
+
+
+
+
+
+
+
+

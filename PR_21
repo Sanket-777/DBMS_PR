@@ -1,0 +1,107 @@
+21. Create Database DYPIT using MongoDB
+Create following Collections
+Teachers(Tname,dno,dname,experience,salary,date_of_joining )
+Students(Sname,roll_no,class)
+
+1.Find the information about all teachers
+db.teachers.find().pretty();
+
+2.Find the average salary teachers of computer department
+
+db.teachers.aggregate( [
+   {
+      $match: { dname: 'COMP' }
+   },
+   {
+      $group: { _id: "$name", AvgSalary: { $avg: "$salary" } }
+   }
+] );
+
+
+3.Find the minimum and maximum salary of e&TC department teachers
+
+//minimum salary
+db.teachers.aggregate( [
+
+   {
+      $match: { dname: 'ENTC' }
+   },
+   {
+      $group: { _id: "$name", MinSalary: { $min: "$salary" } }
+   }
+
+] )
+
+
+//for maximum salary 
+db.teachers.aggregate( [
+
+   {
+      $match: { dname: 'ENTC' }
+   },
+   {
+      $group: { _id: "$name", MaxSalary: { $max: "$salary" } }
+   }
+
+] )
+
+
+4.Find the information about all teachers of computer,IT,and E&TC department having
+salary greate than or equl to 10000/-
+db.teachers.find( { salary : {$gte : 10000} , dname : {$in :['IT','COMP', 'ENTC']}})
+
+
+5. Find the student information having roll_no = 2 or Sname=xyz
+db.students.find( { roll_no : 2 } ).pretty();
+
+
+6. Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry.
+db.teachers.updateMany( {tname : 'praveen'}, {$set : { experience : 10}});
+
+
+
+7. Update the deparment of all the teachers working in IT deprtment to COMP
+db.teachers.updateMany (
+{dname : 'IT'}, {$set : {dname : 'COMP'}} 
+);
+
+
+
+8. find the teachers name and their experience from teachers collection
+db.teachers.find( {}, {tname :1, experience : 1});
+
+
+9. Using Save() method insert one entry in department collection
+
+//this is the syntax of the save method but this method is deprecated
+db.teachers.save( { tname : "krishna", dno : 4 } );
+
+
+
+10. Find the total salary all teachers.
+
+db.teachers.aggregate(
+[
+{ $group: { _id: null, total: { $sum: "$salary" } } }
+]
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

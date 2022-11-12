@@ -1,0 +1,15 @@
+25. Using MapReduce in mongodb solve following queries on given below collection.
+{
+“id” : 0,
+“name” : “Leanne Flinn”,
+“email” : “leanne.flinn@unilogic.com”,
+“work” :”Unilogic” ,
+“age” :27
+“gender” :”Male”
+“Salary” :16660
+“hobbies”:”Acrobatics,Photography,Papier-Mache”
+}
+1.
+2.
+Get the count of Males and Females
+Count the number of users in each hobby

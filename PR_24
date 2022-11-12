@@ -1,0 +1,37 @@
+24. Design and Implement following query using MongoDB
+
+1. Create a collection called ‘games’.
+db.createCollection('games');
+
+2. Add 5 games to the database. Give each document the following properties:
+name, gametype, rating (out of 100)
+
+db.games.insertMany([
+... {name : 'temple run', gameType :'racing', rating : 70 },
+... {name : 'freefire', gameType :'fighting', rating : 89 },
+... {name : 'bull run', gameType :'racing', rating : 90 },
+... {name : 'pubg', gameType :'fighting', rating : 80 },
+... {name : 'red run', gameType :'racing', rating : 60 }
+... ]);
+
+
+3. Write a query that returns all the games
+db.games.find().pretty();
+
+
+4. Write a query that returns the 3 highest rated games.
+db.games.find().pretty().limit(3);
+
+5. Update your two favourite games to have two achievements called ‘Game
+Master’ and ‘Speed Demon’.
+
+db.games.updateMany( 
+{gameType : 'racing'}, {$set : {achivements : ['Game master','Speed Demon']}}
+);
+
+6. Write a query that returns all the games that have both the ‘Game Maser’ and the ‘Speed Demon’ achievements.
+db.games.find( {achivements : ['Game master', 'Speed Demon'] });
+
+8. Write a query that returns only games that have achievements.
+db.games.find( {  }, {achivements :true});
+

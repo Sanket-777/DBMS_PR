@@ -1,0 +1,3 @@
+26. Using MapReduce in mongodb solve following queries on given below collection.
+1. Import zip.json.
+2. Find total population in each state.

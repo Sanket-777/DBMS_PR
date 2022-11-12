@@ -1,0 +1,3 @@
+27.Create a database called ‘library’, create a collection called ‘books’.find the number of books
+having pages less 250 pages and consider ad small book and greater than 250 consider as Big
+book using Map Reduce function.

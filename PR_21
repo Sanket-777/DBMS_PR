@@ -3,6 +3,63 @@ Create following Collections
 Teachers(Tname,dno,dname,experience,salary,date_of_joining )
 Students(Sname,roll_no,class)
 
+db.createCollection('teachers');
+
+db.createCollection('students');
+
+db.teachers.insertOne({ 'tname': 'Rahul', 
+'dno': 12, 'dname': '', 
+'experience': 5, 'salary':76000,
+'date_of_joining': ISODate("2017-11-10T06:31:15.000Z") });
+
+db.teachers.insertMany([
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 5, 'salary': 23000, 'date_of_joining': ISODate("2017-10-12T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 4, 'salary': 92000, 'date_of_joining': ISODate("2018-11-21T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 1, 'dname': 'COMP', 'experience': 2, 'salary': 42000, 'date_of_joining': ISODate("2020-10-02T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 6, 'salary': 25000, 'date_of_joining': ISODate("2016-12-22T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 2, 'salary': 54000, 'date_of_joining': ISODate("2020-09-17T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 2, 'dname': 'ENTC', 'experience': 1, 'salary': 56000, 'date_of_joining': ISODate("2021-06-13T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 9, 'salary': 30000, 'date_of_joining': ISODate("2013-03-23T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 7, 'salary': 60000, 'date_of_joining': ISODate("2015-03-14T06:31:15.000Z") },
+ { 'tname': 'praveen', 'dno': 3, 'dname': 'IT', 'experience': 3, 'salary': 30000, 'date_of_joining': ISODate("2019-11-10T06:31:15.000Z") }
+] );
+
+
+
+db.teachers.find().pretty();
+
+
+db.students.insertMany([{
+   'sname': 'krishna',
+    'roll_no': 71 ,
+   'class': 'TCOD' ,
+
+ },
+{
+     'sname': 'jayesh',
+     'roll_no': 77 ,
+     'class': 'TCOD' 
+ },
+ {
+     'sname': 'rupesh',
+     'roll_no': 32 ,
+     'class': 'TCOD' 
+ 
+ },
+ {
+     'sname': 'akash',
+     'roll_no': 73 ,
+     'class': 'TCOD' 
+},
+ {
+    'sname': 'dinesh',
+    'roll_no': 79 ,
+     'class': 'TCOC' 
+ }
+]);
+
+
+
 1.Find the information about all teachers
 db.teachers.find().pretty();
 

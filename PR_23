@@ -1,7 +1,20 @@
 23. Create index and fire queries with MongoDB
 1. Import zip.json.
+mongoimport --db <databaseName> --collection <collectionName> --file <filePath/jsonFile.json> 
+
 2. Create single field, composite and multikey indexes.
+single -> db.<collectionName>.createIndex( {'ind' : 1 });
+multikey -> db.<collectionName>.createIndex( {'index' : 2, 'name' : 4 });
+composite -> db.<collectionName>.createIndex( {'index' : 2, 'name' : 4 },{'indw' : 3 });
+
+
 3. Fire queries given below again and write your analysis.
 1. Display all cities having population above 1600.
+db.<collectionName>.find( { population : {$gt : 1600} });
+
+
 2. Display all cities in state “KS”.
+db.<collectionName>.find( {state : 'KS'}, {city :1});
+
 3. Display location of city "TIMKEN"
+db.<collectionName>.find( {city : 'TIMKEN'}, {location :1});

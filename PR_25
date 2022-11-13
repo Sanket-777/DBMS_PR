@@ -2,52 +2,38 @@ this is not working will fix it soon
 
 25. Using MapReduce in mongodb solve following queries on given below collection.
 {
-“id” : 0,
-“name” : “Leanne Flinn”,
-“email” : “leanne.flinn@unilogic.com”,
-“work” :”Unilogic” ,
-“age” :27
-“gender” :”Male”
-“Salary” :16660
-“hobbies”:”Acrobatics,Photography,Papier-Mache”
+“id” : 0, “name” : “Leanne Flinn”, “email” : “leanne.flinn@unilogic.com”, “work” :”Unilogic” , “age” :27 “gender” :”Male” “Salary” :16660 “hobbies”:”Acrobatics,Photography,Papier-Mache”
 }
 
+db.prac25.insertMany(
+[
+{ id : 0, name : 'Larry Page', email : 'krishna@gmail.com', work :'SDE-1' , age :26, gender :'Male', Salary :16660, hobbies :'singing' },
+{ id : 1, name : 'Elon musk', email : 'elon@gmail.com', work :'SDE-2' , age :36, gender :'Male', Salary :196660, hobbies :'wrapper' },
+{ id : 2, name : 'sarvesh', email : 'sarvesh@gmail.com', work :'Developer' , age : 29, gender :'Female', Salary : 898896, hobbies :'ceater' },
+{ id : 3, name : 'chetan', email : 'chetan@gmail.com', work :'engineer' , age :20, gender :'Male', Salary :16660, hobbies :'singing' },
+{ id : 4, name : 'sanket', email : 'sanket@gmail.com', work :'manager' , age :26, gender :'Female', Salary :89656, hobbies :'sleeping' }
+]
+);
+
 Get the count of Males and Females
+
+db.prac25.find().pretty();
+db.prac25.aggregate([
+    {
+        "$group": {
+            "_id": "$gender",
+            "count": { "$sum": 1 }
+        }
+    }
+]);
+
+
 Count the number of users in each hobby
-
-
-
-************************************************************************************
-use library;
-
-db.books.insertOne({name : "Understanding JAVA", pages : 100});
-db.books.insertOne({name : "Understanding JSON", pages : 200});
-
-db.books.insertMany([
- {name : "Understanding XML", pages : 300},
- {name : "Understanding Web Services", pages : 400},
- {name : "Understanding Axis2", pages : 150}
+db.prac25.aggregate([
+ {$match : { } },
+ {$group : {_id :'$hobbies', sumOfHobby : {$sum :1 }  } }
  ]);
 
 
-var map = function() {  
-...     var category;  
-...     if ( this.pages >= 250 )   
-...     category = 'Big Books';  
-...     else   
-...     category = "Small Books";  
-...     emit(category, {name: this.name});  
-...     };
-
-var reduce = function(key, values) {  
-...     var sum = 0;  
-...     values.forEach(function(doc) {  
-...     sum += 1;  
-...     });  
-...     return {books: sum};  
-...     }; 
 
 
-var count  = db.books.mapReduce(map, reduce, {out: "book_results"});
-
-db[count.result].find();

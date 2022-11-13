@@ -1,3 +1,13 @@
 26. Using MapReduce in mongodb solve following queries on given below collection.
+
 1. Import zip.json.
+mongoimport --db <databaseName> --collection <collectionName> --file <filePath/jsonFile.json>
+
 2. Find total population in each state.
+
+db.teachers.aggregate([ 
+... { $match: { state: { $in: ['state1', 'state2', 'state2'] } } }, 
+... { $group: { _id: '$state', totalPopulation:{ $sum: '$population'} } }
+... ]);
+
+

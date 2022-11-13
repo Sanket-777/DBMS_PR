@@ -26,6 +26,7 @@ db.teachers.insertMany([
 
 
 
+
 db.teachers.find().pretty();
 
 

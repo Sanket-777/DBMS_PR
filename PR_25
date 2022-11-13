@@ -1,3 +1,5 @@
+this is not working will fix it soon
+
 25. Using MapReduce in mongodb solve following queries on given below collection.
 {
 “id” : 0,
@@ -9,7 +11,43 @@
 “Salary” :16660
 “hobbies”:”Acrobatics,Photography,Papier-Mache”
 }
-1.
-2.
+
 Get the count of Males and Females
 Count the number of users in each hobby
+
+
+
+************************************************************************************
+use library;
+
+db.books.insertOne({name : "Understanding JAVA", pages : 100});
+db.books.insertOne({name : "Understanding JSON", pages : 200});
+
+db.books.insertMany([
+ {name : "Understanding XML", pages : 300},
+ {name : "Understanding Web Services", pages : 400},
+ {name : "Understanding Axis2", pages : 150}
+ ]);
+
+
+var map = function() {  
+...     var category;  
+...     if ( this.pages >= 250 )   
+...     category = 'Big Books';  
+...     else   
+...     category = "Small Books";  
+...     emit(category, {name: this.name});  
+...     };
+
+var reduce = function(key, values) {  
+...     var sum = 0;  
+...     values.forEach(function(doc) {  
+...     sum += 1;  
+...     });  
+...     return {books: sum};  
+...     }; 
+
+
+var count  = db.books.mapReduce(map, reduce, {out: "book_results"});
+
+db[count.result].find();
